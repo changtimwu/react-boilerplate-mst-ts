@@ -24,6 +24,9 @@
     "noUnusedLocals": false,
     "experimentalDecorators": true
   },
+  "include": [
+    "./types/"
+  ],
   "exclude": [
     "node_modules",
     "build",
