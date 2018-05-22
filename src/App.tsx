@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { observer } from 'mobx-react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
 import { InvoiceType } from './models/invoice'
-
 import EthApp from './EthApp'
-import BootstrapDemo from './BootstrapDemo'
+import MuiDemo from './MuiDemo'
 import InvoiceApp from './InvoiceApp'
-
+import './App.css'
 interface Props {
   invoice: InvoiceType
 }
@@ -17,7 +16,6 @@ const Home = () => (
   </div>
 );
 
-
 @observer
 class App extends React.Component<Props, {}> {
   render() {
@@ -25,17 +23,17 @@ class App extends React.Component<Props, {}> {
     return (
       <Router>
         <div>
-          <ul>
-            <li> <Link to="/">Home</Link> </li>
-            <li> <Link to="/ethapp">Eth App</Link></li>
-            <li> <Link to="/invoiceapp">Invoice App</Link></li>
-            <li> <Link to="/bootstrapdemo">Bootstrap Demo</Link></li>
+          <ul className="menulist">
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/ethapp">Eth App</NavLink>
+            <NavLink to="/invoiceapp">Invoice App</NavLink>
+            <NavLink to="/muidemo">MaterialUI Demo</NavLink>
           </ul>
           <hr />
           <Route exact path="/" component={Home} />
           <Route path="/ethapp" component={EthApp} />
           <Route path="/invoicedpp" component={InvoiceApp} />
-          <Route path="/bootstrapdemo" component={BootstrapDemo} />
+          <Route path="/muidemo" component={MuiDemo} />
         </div>
       </Router>
     );

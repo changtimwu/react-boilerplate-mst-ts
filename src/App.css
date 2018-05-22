@@ -18,6 +18,10 @@
   font-size: 1.5em;
 }
 
+ul.menulist a {
+  margin-right: 1em
+}
+
 .App-intro {
   font-size: large;
 }
