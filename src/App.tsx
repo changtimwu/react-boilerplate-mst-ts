@@ -4,6 +4,8 @@ import './App.css'
 import { InvoiceType } from './models/invoice'
 import { ItemType } from './models/item'
 import Item from './item'
+import EthApp from './EthApp'
+import BootstrapDemo from './BootstrapDemo'
 
 interface Props {
   invoice: InvoiceType
@@ -30,6 +32,8 @@ class App extends React.Component<Props, ItemType> {
     const { invoice } = this.props
     return (
       <div className="App">
+        <EthApp />
+        <BootstrapDemo />
         <h1>invoice is {invoice.status()}</h1>
         <h2>currency = {invoice.currency}</h2>
         <button onClick={invoice.markPaid}>Pay</button>
