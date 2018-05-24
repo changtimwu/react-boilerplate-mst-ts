@@ -63,16 +63,11 @@ class InvoiceMgr extends React.Component<Props> {
 }
 
 const ssInvoices: InvoiceType[] = []
-class InvoiceApp extends React.Component {
-    render() {
-        console.log('in InvoiceApp iaa')
-        return (
-            <div>
-                <InvoiceMgr ssInvoices={ssInvoices} />
-                <InvoiceEdit invoice={invoice} />
-            </div>
-        )
-    }
-}
+const InvoiceApp = () => (
+    <div>
+        <InvoiceMgr ssInvoices={ssInvoices} />
+        <InvoiceEdit invoice={invoice} />
+    </div>
+)
 
 export default InvoiceApp
