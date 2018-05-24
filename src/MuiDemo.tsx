@@ -1,5 +1,6 @@
 import * as React from 'react'
-import ReactDOM from 'react-dom'
+import * as ReactDOM from 'react-dom';
+
 import Button from '@material-ui/core/Button'
 
 const MuiDemo = () => (

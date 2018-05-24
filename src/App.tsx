@@ -1,14 +1,9 @@
-import * as React from 'react';
-import { observer } from 'mobx-react'
-import { BrowserRouter as Router, Route, Link, NavLink } from "react-router-dom";
-import { InvoiceType } from './models/invoice'
+import * as React from 'react'
+import { BrowserRouter as Router, Route, Link, NavLink } from 'react-router-dom'
 import EthApp from './EthApp'
 import MuiDemo from './MuiDemo'
 import InvoiceApp from './InvoiceApp'
 import './App.css'
-interface Props {
-  invoice: InvoiceType
-}
 
 const Home = () => (
   <div>
@@ -16,10 +11,8 @@ const Home = () => (
   </div>
 );
 
-@observer
-class App extends React.Component<Props, {}> {
+class App extends React.Component {
   render() {
-    const { invoice } = this.props
     return (
       <Router>
         <div>
