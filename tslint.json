@@ -29,10 +29,10 @@
         "jsdoc-format": true,
         "jsx-no-lambda": false,
         "jsx-no-multiline-js": false,
+        "jsx-boolean-value": false,
         "label-position": true,
         "max-line-length": [
-            true,
-            120
+            false
         ],
         "member-ordering": [
             true,
