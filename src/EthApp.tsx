@@ -57,12 +57,12 @@ class EthApp extends React.Component<{}, State> {
   async netInfo() {
     let net = this.web3.eth.net
     let peercnts = await net.getPeerCount()
-    // console.log('peer counts=', peercnts)
-    //let nettype = await net.getNetworkType()
-    // console.log('network type=', nettype)
+    console.log('peer counts=', peercnts)
+    let nettype = await net.getNetworkType()
+    console.log('network type=', nettype)
     let msgs = this.state.msgs
     msgs.peercnts = peercnts
-    //msgs.nettype = nettype
+    msgs.nettype = nettype
     this.setState({ msgs })
   }
   async ethsysInfo() {
