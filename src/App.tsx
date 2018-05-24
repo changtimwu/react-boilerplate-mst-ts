@@ -25,7 +25,7 @@ class App extends React.Component {
           <hr />
           <Route exact path="/" component={Home} />
           <Route path="/ethapp" component={EthApp} />
-          <Route path="/invoicedpp" component={InvoiceApp} />
+          <Route path="/invoiceapp" component={InvoiceApp} />
           <Route path="/muidemo" component={MuiDemo} />
         </div>
       </Router>
