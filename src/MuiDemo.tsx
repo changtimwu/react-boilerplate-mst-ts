@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button'
 import SvgIcons from './MuiSvgIcon'
+import Spacing from './MuiSpacing'
 const MuiDemo = () => (
     <div>
         <h2>Material UI Demo</h2>
@@ -9,6 +10,7 @@ const MuiDemo = () => (
             Hello World
         </Button>
         <SvgIcons />
+        <Spacing />
     </div>
 )
 export default MuiDemo
