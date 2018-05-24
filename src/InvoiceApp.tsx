@@ -1,80 +1,77 @@
 import * as React from 'react';
-import { observer } from 'mobx-react'
-import { InvoiceType } from './models/invoice'
-import { ItemType } from './models/item'
-import Item from './item'
+import * as ReactDOM from 'react-dom';
+import { applySnapshot, getSnapshot, onSnapshot } from 'mobx-state-tree'
+import Invoice, { InvoiceType } from './models/invoice'
+import InvoiceEdit from './InvoiceEdit'
 
-interface Props {
-    invoice: InvoiceType
+/*
+import { onPatch } from 'mobx-state-tree'
+onPatch(invoice, patch => {
+  console.log(patch)
+})
+*/
+// import makeInspectable from 'mobx-devtools-mst'
+// makeInspectable(invoice)
+let initialState: object = { currency: 'TWD' }
+if (localStorage.getItem('invoiceApp')) {
+    const json = JSON.parse(localStorage.getItem('invoiceApp') as string)
+    if (Invoice.is(json)) {
+        initialState = json
+    }
 }
 
-@observer
-class InvoiceApp extends React.Component<Props, ItemType> {
-    private nameInput: HTMLInputElement
-    onSubmit() {
-        this.props.invoice.itemList.add(this.state)
-    }
+const invoice = Invoice.create(initialState)
+onSnapshot(invoice, snapshot => {
+    localStorage.setItem('invoiceApp', JSON.stringify(snapshot))
+})
 
-    onChangeName(e: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ name: e.target.value })
+interface Props {
+    ssInvoices: InvoiceType[]
+}
+class InvoiceMgr extends React.Component<Props> {
+    traceInvoice() {
+        console.log(getSnapshot(invoice))
     }
-    onChangeQuantity(e: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ quantity: parseInt(e.target.value, 10) })
+    saveSnapshot() {
+        this.props.ssInvoices.push(getSnapshot(invoice))
+        console.log('ssInvoices length=', this.props.ssInvoices.length)
+        this.forceUpdate()
     }
-    onChangePrice(e: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({ price: parseInt(e.target.value, 10) })
+    restoreSnapshot() {
+        const ilist = this.props.ssInvoices.pop()
+        if (ilist) {
+            // this.props.invoice.itemList = ilist
+            applySnapshot(invoice, ilist)
+            this.forceUpdate()
+        }
     }
-
     render() {
-        const { invoice } = this.props
+        const ss = this.props.ssInvoices
         return (
             <div>
-                <h1>invoice is {invoice.status()}</h1>
-                <h2>currency = {invoice.currency}</h2>
-                <button onClick={invoice.markPaid}>Pay</button>
-                <form
-                    onSubmit={e => {
-                        e.preventDefault()
-                        this.onSubmit()
-                        const elform = e.target as HTMLFormElement
-                        elform.reset()
-                        this.nameInput.focus()
-                    }}
+                <button onClick={e => this.traceInvoice()}>Trace</button>
+                <button onClick={e => this.saveSnapshot()}>Save Cart {ss.length}</button>
+                <button
+                    onClick={e => this.restoreSnapshot()}
+                    disabled={ss.length === 0}
                 >
-                    <label htmlFor="name">
-                        Name
-            <input
-                            type="text"
-                            onChange={e => this.onChangeName(e)}
-                            ref={(input) => { this.nameInput = input as HTMLInputElement; }}
-                        />
-                    </label>
-                    <label htmlFor="quantity">
-                        Quantity
-            <input
-                            type="number"
-                            id="quantity"
-                            onChange={e => this.onChangeQuantity(e)}
-                        />
-                    </label>
-                    <label htmlFor="price">
-                        Price
-            <input
-                            type="number"
-                            id="price"
-                            onChange={e => this.onChangePrice(e)}
-                        />
-                    </label>
-                    <button type="submit">Add</button>
-                </form>
-                <ul>
-                    {invoice.itemList.items.map((item, i) => (
-                        <Item item={item} key={i} />
-                    ))}
-                </ul>
-                <h2> {invoice.itemList.len} items and total is ${invoice.itemList.total.toFixed}</h2>
+                    Restore Cart
+                </button>
             </div>
-        );
+        )
+    }
+}
+
+const ssInvoices: InvoiceType[] = []
+class InvoiceApp extends React.Component {
+    render() {
+        console.log('in InvoiceApp iaa')
+        return (
+            <div>
+                <InvoiceMgr ssInvoices={ssInvoices} />
+                <InvoiceEdit invoice={invoice} />
+            </div>
+        )
     }
 }
 
