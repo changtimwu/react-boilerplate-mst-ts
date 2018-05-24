@@ -1,6 +1,6 @@
 import BigNumber from 'bn.js'
 import * as us from 'underscore'
-
+import {Buffer} from 'buffer'
 
 //'{"jsonrpc":"2.0","method":"eth_sendTransaction","params":[{see above}],"id":1}'
 export declare interface JsonRPCRequest {
@@ -88,7 +88,7 @@ export declare interface Transaction {
 export declare interface EventLog {
   event: string
   address: string
-  returnValues: object
+  returnValues: any
   logIndex: number
   transactionIndex: number
   transactionHash: string
@@ -379,7 +379,7 @@ export declare class Eth {
     decodeParameters(types: EthAbiDecodeParametersType[], hex: string): EthAbiDecodeParametersResultObject
   }
   accounts: {
-    'new'(entropy?: string): Account
+    create(entropy?: string): Account
     privateKeyToAccount(privKey: string): Account
     publicToAddress(key: string): string
     signTransaction(tx: Tx, privateKey: string, returnSignature?: boolean, cb?: (err: Error, result: string | Signature) => void): Promise<string> | Signature
@@ -389,7 +389,7 @@ export declare class Eth {
     encrypt(privateKey: string, password: string): PrivateKey
     decrypt(privateKey: PrivateKey, password: string): Account
     wallet: {
-      'new'(numberOfAccounts: number, entropy: string): Account[]
+      create(numberOfAccounts: number, entropy: string): Account[]
       add(account: string | Account): any
       remove(account: string | number): any
       save(password: string, keyname?: string): string
@@ -459,12 +459,14 @@ export declare class Net {
 }
 /* just reference https://github.com/ethereum/go-ethereum/wiki/Management-APIs#personal*/
 export declare class Personal {
+  ecRecover(message:string, sig:string):void
   newAccount(password: string, cb?: Callback<boolean>): Promise<boolean>
   getAccounts(cb?: Callback<Array<string>>): Promise<Array<string>>
   importRawKey(keydata: string, passphrase: string, cb?: Callback<string>): Promise<string>
   lockAccount(address: string, cb?: Callback<boolean>): Promise<boolean>
   unlockAccount(address: string, passphrase: string, duration: number, cb?: Callback<boolean>): Promise<boolean>
   sign(dataToSign: string, address: string, password: string, cb?: Callback<string>): Promise<string>
+  listAccounts(cb?:Callback<string[]>):Promise<string[]>
 }
 export declare class Shh { }
 declare interface PickTypeData {
