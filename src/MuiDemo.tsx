@@ -1,14 +1,14 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom';
-
 import Button from '@material-ui/core/Button'
-
+import SvgIcons from './MuiSvgIcon'
 const MuiDemo = () => (
     <div>
         <h2>Material UI Demo</h2>
         <Button variant="raised" color="primary">
             Hello World
-      </Button>
+        </Button>
+        <SvgIcons />
     </div>
 )
 export default MuiDemo
