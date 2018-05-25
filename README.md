@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/changtimwu/react-boilerplate-mst-ts.svg?style=svg)](https://circleci.com/gh/changtimwu/react-boilerplate-mst-ts)
+[![CircleCI](https://circleci.com/gh/changtimwu/react-boilerplate-mst-ts/tree/web3.svg?style=svg)](https://circleci.com/gh/changtimwu/react-boilerplate-mst-ts/tree/web3)
 
 ## first time setup
 ```
