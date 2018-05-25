@@ -16,13 +16,13 @@
     "web3": "^1.0.0-beta.34"
   },
   "scripts": {
+    "postinstall": "cp types/web3/* node_modules/web3/",
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "jest",
     "coverage": "jest --coverage",
     "eject": "react-scripts-ts eject",
-    "lint": "tslint --project package.json",
-    "patchweb3": "cp types/web3/* node_modules/web3/"
+    "lint": "tslint --project package.json"
   },
   "jest": {
     "snapshotSerializers": [
