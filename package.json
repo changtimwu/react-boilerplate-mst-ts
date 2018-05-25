@@ -23,6 +23,23 @@
     "lint": "tslint --project package.json",
     "patchweb3": "cp types/web3/* node_modules/web3/"
   },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.ts",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js|jsx)$"
+  },
   "devDependencies": {
     "@types/jest": "^22.2.3",
     "@types/node": "^10.1.2",
@@ -30,6 +47,12 @@
     "@types/react-dom": "^16.0.5",
     "@types/react-router-dom": "^4.2.6",
     "@types/underscore": "^1.8.8",
+    "babel-jest": "^23.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.4.4",
+    "jest-enzyme": "^6.0.0",
+    "ts-jest": "^22.4.6",
     "typescript": "^2.8.3"
   }
 }
