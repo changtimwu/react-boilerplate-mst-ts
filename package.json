@@ -27,7 +27,7 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
-    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.ts",
+    "setupTestFrameworkScriptFile": "<rootDir>/setupTests.ts",
     "moduleFileExtensions": [
       "ts",
       "tsx",
